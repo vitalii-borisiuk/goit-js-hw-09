@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vitalii-borisiuk/goit-js-hw-09.git"
+    "url": "git+https://github.com/vitalii-borisiuk/goit-js-hw-09.git"
   },
   "keywords": [],
   "author": "Vitalii Borisiuk vitalii.borisiuk@gmail.com",
