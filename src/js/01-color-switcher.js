@@ -17,7 +17,8 @@ function changeBg() {
 refs.stopBtn.addEventListener('click', () => {
     clearInterval(intervalId);
     if (intervalId !== null) {
-        document.querySelector('button').disabled = false;
+    document.querySelector('button').disabled = false;
+
     }
 });
 
