@@ -19,15 +19,19 @@ function onFormSubmit(event) {
 
   let currentDelay = formDelay;
   for (let i = 0; i < formAmount; i += 1){
-    if (currentDelay !== 0) {
-      currentDelay += formStep;
-    };
-    createPromise(i + 1, currentDelay);
+       createPromise(i + 1, currentDelay).then(({ position, delay }) => {
+    Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+  })
+    .catch(({ position, delay }) => {
+      Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+    });
+    currentDelay += formStep;
   };  
+  event.currentTarget.reset();
 };
 
 function createPromise(position, delay) {
-  const promise = new Promise((resolve, reject) => {
+return new Promise((resolve, reject) => {
     setTimeout(() => {
       const shouldResolve = Math.random() > 0.3;
 
@@ -38,12 +42,5 @@ function createPromise(position, delay) {
         reject({ position, delay });
       };
     }, delay);
-  });
-
-  promise.then(({ position, delay }) => {
-    Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-  })
-    .catch(({ position, delay }) => {
-      Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-    });
+  }); 
 };

@@ -22,11 +22,16 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     selectedDate = selectedDates[0].getTime();
-    if (selectedDate < Date.now()) {
+    if (selectedDate < Date.now()) {       
+      refs.startBtn.disabled = true;
       Notify.failure('Please choose a date in the future.');
     }
+    else {
     refs.startBtn.disabled = false;
+    };
+
   },
+  
 };
 
 flatpickr(refs.timer, options);
@@ -39,7 +44,7 @@ let object = {};
 const timer = () => {
   intervalId = setInterval(() => {
     const deltaTime = selectedDate - new Date().getTime();
-    if (deltaTime <= 0) {
+    if (deltaTime <= 1000) {
       clearInterval(intervalId);
     }
 
